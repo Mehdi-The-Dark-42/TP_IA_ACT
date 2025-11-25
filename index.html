@@ -936,58 +936,100 @@
             
             const risk = calculateRiskLevel();
             
-            const recommendations = {
-                inacceptable: [
-                    "⛔ Ce système d'IA est INTERDIT selon le RIA",
-                    "🔄 Repenser complètement l'approche technologique",
-                    "⚖️ Consulter un juriste spécialisé en droit de l'IA",
-                    "📋 Évaluer des alternatives conformes"
-                ],
-                eleve: [
-                    "📋 Documentation technique complète obligatoire",
-                    "🔍 Évaluation de conformité par organisme notifié",
-                    "👁️ Mise en place de supervision humaine",
-                    "🔐 Tests de robustesse et cybersécurité renforcés",
-                    "📊 Traçabilité complète des données d'entraînement",
-                    "✅ Enregistrement dans la base de données européenne"
-                ],
-                limite: [
-                    "🔔 Informer les utilisateurs de l'interaction avec l'IA",
-                    "📝 Transparence sur le fonctionnement du système",
-                    "👤 Identifier clairement le contenu généré par IA",
-                    "📋 Documentation des processus décisionnels"
-                ],
-                minimal: [
-                    "✅ Aucune obligation spécifique du RIA",
-                    "💡 Suivre les bonnes pratiques éthiques",
-                    "📊 Documenter volontairement pour la transparence",
-                    "🔄 Rester informé des évolutions réglementaires"
-                ],
-                acceptable: [
-                    "🎉 Votre système IA est CONFORME au RIA",
-                    "✅ Maintenir les bonnes pratiques actuelles",
-                    "📋 Documenter régulièrement les évolutions",
-                    "🔍 Réaliser des audits de conformité annuels",
-                    "📊 Suivre l'impact réel sur les utilisateurs",
-                    "🔄 Rester informé des évolutions réglementaires"
-                ]
-            };
+            // Générer les recommandations dynamiques basées sur le score
+            function getRecommendations(score, level) {
+                let recs = [];
+                
+                if (level === 'inacceptable') {
+                    recs.push("⛔ Ce système d'IA est INTERDIT selon le RIA");
+                    recs.push("🔄 Repenser complètement l'approche technologique");
+                    recs.push("⚖️ Consulter un juriste spécialisé en droit de l'IA");
+                    recs.push("📋 Évaluer des alternatives conformes");
+                    if (score >= 85) {
+                        recs.push("🚨 Action urgente requise - Cessation du système recommandée");
+                    }
+                } else if (level === 'eleve') {
+                    recs.push("📋 Documentation technique complète obligatoire");
+                    recs.push("🔍 Évaluation de conformité par organisme notifié");
+                    recs.push("👁️ Mise en place de supervision humaine");
+                    recs.push("🔐 Tests de robustesse et cybersécurité renforcés");
+                    if (score >= 55) {
+                        recs.push("📊 Traçabilité complète des données d'entraînement");
+                        recs.push("✅ Enregistrement dans la base de données européenne");
+                    } else {
+                        recs.push("📝 Évaluation d'impact minimisée requise");
+                    }
+                } else if (level === 'limite') {
+                    recs.push("🔔 Informer les utilisateurs de l'interaction avec l'IA");
+                    recs.push("📝 Transparence sur le fonctionnement du système");
+                    recs.push("👤 Identifier clairement le contenu généré par IA");
+                    if (score >= 30) {
+                        recs.push("📋 Documentation des processus décisionnels");
+                        recs.push("✅ Tests de performance réguliers");
+                    } else {
+                        recs.push("💡 Mettre en place des mécanismes de retour utilisateur");
+                    }
+                } else if (level === 'minimal') {
+                    recs.push("✅ Aucune obligation spécifique du RIA");
+                    recs.push("💡 Suivre les bonnes pratiques éthiques");
+                    recs.push("📊 Documenter volontairement pour la transparence");
+                    if (score >= 10) {
+                        recs.push("📝 Mettre en place une gouvernance IA");
+                    }
+                    recs.push("🔄 Rester informé des évolutions réglementaires");
+                } else if (level === 'acceptable') {
+                    recs.push("🎉 Votre système IA est CONFORME au RIA");
+                    recs.push("✅ Maintenir les bonnes pratiques actuelles");
+                    recs.push("📋 Documenter régulièrement les évolutions");
+                    recs.push("🔍 Réaliser des audits de conformité annuels");
+                    recs.push("📊 Suivre l'impact réel sur les utilisateurs");
+                    recs.push("🔄 Rester informé des évolutions réglementaires");
+                }
+                
+                return recs;
+            }
             
-            const estimatedCost = {
-                inacceptable: "Non applicable - Système interdit",
-                eleve: "15 000€ - 50 000€",
-                limite: "3 000€ - 8 000€",
-                minimal: "1 000€ - 3 000€",
-                acceptable: "Maintenance régulière"
-            };
+            // Générer l'estimation dynamique basée sur le score
+            function getEstimatedCost(score, level) {
+                if (level === 'inacceptable') return "Non applicable - Système interdit";
+                if (level === 'eleve') {
+                    if (score >= 80) return "40 000€ - 80 000€";
+                    if (score >= 60) return "25 000€ - 50 000€";
+                    return "15 000€ - 30 000€";
+                }
+                if (level === 'limite') {
+                    if (score >= 35) return "5 000€ - 12 000€";
+                    return "2 000€ - 5 000€";
+                }
+                if (level === 'minimal') {
+                    if (score >= 15) return "2 000€ - 4 000€";
+                    return "500€ - 2 000€";
+                }
+                return "Maintenance régulière";
+            }
             
-            const timeline = {
-                inacceptable: "Arrêt immédiat requis",
-                eleve: "6-12 mois",
-                limite: "2-4 mois",
-                minimal: "1-2 mois",
-                acceptable: "En conformité"
-            };
+            // Générer le délai dynamique basé sur le score
+            function getTimeline(score, level) {
+                if (level === 'inacceptable') return "Arrêt immédiat requis";
+                if (level === 'eleve') {
+                    if (score >= 80) return "9-18 mois";
+                    if (score >= 60) return "6-12 mois";
+                    return "4-8 mois";
+                }
+                if (level === 'limite') {
+                    if (score >= 35) return "3-6 mois";
+                    return "1-3 mois";
+                }
+                if (level === 'minimal') {
+                    if (score >= 15) return "2-4 semaines";
+                    return "1-2 semaines";
+                }
+                return "En conformité";
+            }
+            
+            const recommendations = getRecommendations(risk.score, risk.level);
+            const estimatedCost = getEstimatedCost(risk.score, risk.level);
+            const timeline = getTimeline(risk.score, risk.level);
             
             const riskLabels = {
                 inacceptable: '🚫 Risque Inacceptable',
@@ -1007,7 +1049,7 @@
             
             const recList = document.getElementById('recommendationsList');
             recList.innerHTML = '';
-            recommendations[risk.level].forEach((rec, index) => {
+            recommendations.forEach((rec, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span class="rec-number">${index + 1}.</span>
@@ -1016,8 +1058,8 @@
                 recList.appendChild(li);
             });
             
-            document.getElementById('estimatedCost').textContent = estimatedCost[risk.level];
-            document.getElementById('timeline').textContent = timeline[risk.level];
+            document.getElementById('estimatedCost').textContent = estimatedCost;
+            document.getElementById('timeline').textContent = timeline;
             
             showPage('resultsPage');
         }
