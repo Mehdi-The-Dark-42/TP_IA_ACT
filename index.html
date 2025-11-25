@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diagnostic RIA - AI Compliance Partners</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -789,7 +790,7 @@
                             Nos experts vous contacteront sous 24h pour discuter de votre projet et vous proposer un accompagnement personnalisé.
                         </p>
                         <div class="button-row">
-                            <button class="btn-white">
+                            <button onclick="downloadPDF()" class="btn-white">
                                 📄 Télécharger le rapport PDF
                             </button>
                             <button onclick="resetApp()" class="btn-dark">
@@ -1019,6 +1020,23 @@
             document.getElementById('timeline').textContent = timeline[risk.level];
             
             showPage('resultsPage');
+        }
+
+        // Télécharger le rapport en PDF
+        function downloadPDF() {
+            const element = document.getElementById('resultsPage');
+            const companyName = appState.companyName || 'Diagnostic';
+            const fileName = `Diagnostic_RIA_${companyName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+            
+            const opt = {
+                margin: 10,
+                filename: fileName,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
         }
 
         // Réinitialiser l'application
