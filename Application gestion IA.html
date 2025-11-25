@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic RIA - AI Compliance Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .icon-large {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .header-section h1, .header-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .content-section {
+            padding: 40px;
+        }
+
+        .intro-text {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .info-box {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .info-box h3 {
+            color: #1e3a8a;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: start;
+            color: #1e40af;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .check-icon {
+            background: #3b82f6;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .duration {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: #e5e7eb;
+            color: #374151;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .btn-white {
+            flex: 1;
+            background: white;
+            color: #6a11cb;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-white:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+        }
+
+        .btn-dark {
+            flex: 1;
+            background: #581c87;
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            background: #6b21a8;
+        }
+
+        .arrow {
+            font-size: 20px;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 24px;
+        }
+
+        .form-section {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-section h3 {
+            color: #111827;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6a11cb;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px 24px;
+            border: 2px solid #d1d5db;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: #6a11cb;
+            color: white;
+            border-color: #6a11cb;
+        }
+
+        .toggle-btn:hover {
+            border-color: #9333ea;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .checkbox-btn {
+            padding: 12px 16px;
+            border: 2px solid #d1d5db;
+            background: white;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-btn.active {
+            background: #6a11cb;
+            color: white;
+            border-color: #6a11cb;
+        }
+
+        .checkbox-btn:hover {
+            border-color: #9333ea;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .risk-result {
+            background: linear-gradient(135deg, #f5f3ff 0%, #dbeafe 100%);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #c4b5fd;
+            margin-bottom: 32px;
+        }
+
+        .risk-result h3 {
+            font-size: 24px;
+            color: #111827;
+            margin-bottom: 20px;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .risk-badge.inacceptable {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .risk-badge.eleve {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .risk-badge.limite {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .risk-badge.minimal {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .risk-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 16px;
+            color: #4b5563;
+        }
+
+        .score-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #6a11cb;
+        }
+
+        .recommendations-section {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+
+        .recommendations-section h3 {
+            font-size: 24px;
+            color: #111827;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .recommendations-list {
+            list-style: none;
+        }
+
+        .recommendations-list li {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .rec-number {
+            color: #6a11cb;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .rec-text {
+            color: #374151;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .estimates-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .estimate-card {
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid;
+        }
+
+        .estimate-card.budget {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fae8ff 100%);
+            border-color: #d8b4fe;
+        }
+
+        .estimate-card.timeline {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            border-color: #93c5fd;
+        }
+
+        .estimate-card h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .estimate-card.budget h4 {
+            color: #581c87;
+        }
+
+        .estimate-card.timeline h4 {
+            color: #075985;
+        }
+
+        .estimate-value {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .estimate-card.budget .estimate-value {
+            color: #6b21a8;
+        }
+
+        .estimate-card.timeline .estimate-value {
+            color: #0369a1;
+        }
+
+        .estimate-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .estimate-card.budget .estimate-subtitle {
+            color: #7c3aed;
+        }
+
+        .estimate-card.timeline .estimate-subtitle {
+            color: #0284c7;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 32px;
+            border-radius: 16px;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            opacity: 0.95;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .footer-contact {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            .form-row,
+            .checkbox-grid,
+            .estimates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page d'accueil -->
+    <div id="welcomePage" class="page active">
+        <div class="container">
+            <div class="card">
+                <div class="header-section">
+                    <div class="icon-large">🤖</div>
+                    <h1>Diagnostic RIA</h1>
+                    <p class="tagline">Évaluez la conformité de vos systèmes IA</p>
+                </div>
+                
+                <div class="content-section">
+                    <h2>Bienvenue sur notre plateforme</h2>
+                    <p class="intro-text">
+                        Notre outil de diagnostic vous permet d'évaluer en quelques minutes le niveau de risque 
+                        de vos systèmes d'intelligence artificielle selon le Règlement européen sur l'IA (RIA).
+                    </p>
+                    
+                    <div class="info-box">
+                        <h3>📋 Ce que vous obtiendrez :</h3>
+                        <ul class="benefits-list">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                <span>Classification du niveau de risque de votre IA</span>
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                <span>Liste des obligations de conformité applicables</span>
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                <span>Recommandations personnalisées</span>
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                <span>Estimation budgétaire de mise en conformité</span>
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                <span>Devis personnalisé gratuit</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p class="duration">⏱️ Durée estimée : 5-7 minutes</p>
+                    
+                    <button onclick="goToForm()" class="btn-primary">
+                        Commencer le diagnostic
+                        <span class="arrow">→</span>
+                    </button>
+                    
+                    <p class="footer-text">Par <strong>AI Compliance Partners</strong> - Experts en réglementation IA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page formulaire -->
+    <div id="formPage" class="page">
+        <div class="container">
+            <div class="card">
+                <div class="header-section">
+                    <h2>📋 Questionnaire de Diagnostic</h2>
+                    <p class="tagline">Remplissez les informations sur votre entreprise et vos systèmes IA</p>
+                </div>
+                
+                <div class="content-section">
+                    <form id="diagnosticForm">
+                        <!-- Informations entreprise -->
+                        <div class="form-section">
+                            <h3>🏢 Informations de l'entreprise</h3>
+                            
+                            <div class="form-group">
+                                <label>Nom de l'entreprise *</label>
+                                <input type="text" id="companyName" required placeholder="Ex: TechCorp SAS">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" id="email" required placeholder="contact@entreprise.fr">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Téléphone *</label>
+                                    <input type="tel" id="phone" required placeholder="+33 1 23 45 67 89">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Secteur d'activité *</label>
+                                <select id="sector" required>
+                                    <option value="">Sélectionnez un secteur</option>
+                                    <option value="finance">Finance / Banque</option>
+                                    <option value="sante">Santé</option>
+                                    <option value="retail">Commerce / Retail</option>
+                                    <option value="industrie">Industrie</option>
+                                    <option value="tech">Technologies</option>
+                                    <option value="rh">Ressources Humaines</option>
+                                    <option value="securite">Sécurité / Surveillance</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Systèmes IA -->
+                        <div class="form-section">
+                            <h3>🤖 Vos systèmes d'IA</h3>
+                            
+                            <div class="form-group">
+                                <label>Utilisez-vous actuellement l'IA ? *</label>
+                                <div class="button-group">
+                                    <button type="button" class="toggle-btn" data-field="hasAI" data-value="oui">Oui</button>
+                                    <button type="button" class="toggle-btn" data-field="hasAI" data-value="projet">En projet</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Type(s) de systèmes IA utilisés * (plusieurs choix possibles)</label>
+                                <div class="checkbox-grid">
+                                    <button type="button" class="checkbox-btn" data-field="aiTypes" data-value="reconnaissance-faciale">
+                                        👤 Reconnaissance faciale
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="aiTypes" data-value="recrutement">
+                                        💼 Recrutement / RH
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="aiTypes" data-value="credit">
+                                        💳 Scoring crédit
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="aiTypes" data-value="surveillance">
+                                        📹 Surveillance
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="aiTypes" data-value="chatbot">
+                                        💬 Chatbot / Assistant
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="aiTypes" data-value="recommendation">
+                                        🎯 Recommandations
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Objectif principal de l'IA</label>
+                                <textarea id="aiPurpose" rows="3" placeholder="Ex: Automatiser le tri des CV, améliorer l'expérience client..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Données et impact -->
+                        <div class="form-section">
+                            <h3>📊 Données et impact</h3>
+                            
+                            <div class="form-group">
+                                <label>Types de données traitées * (plusieurs choix possibles)</label>
+                                <div class="checkbox-grid">
+                                    <button type="button" class="checkbox-btn" data-field="dataTypes" data-value="biometrique">
+                                        🔐 Données biométriques
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="dataTypes" data-value="sante">
+                                        🏥 Données de santé
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="dataTypes" data-value="judiciaire">
+                                        ⚖️ Données judiciaires
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="dataTypes" data-value="personnelles">
+                                        👤 Données personnelles
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="dataTypes" data-value="professionnelles">
+                                        💼 Données professionnelles
+                                    </button>
+                                    <button type="button" class="checkbox-btn" data-field="dataTypes" data-value="comportementales">
+                                        📈 Données comportementales
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Impact sur les utilisateurs *</label>
+                                <select id="userImpact" required>
+                                    <option value="">Sélectionnez le niveau d'impact</option>
+                                    <option value="critique">Critique (droits fondamentaux, emploi, crédit)</option>
+                                    <option value="important">Important (décisions significatives)</option>
+                                    <option value="modere">Modéré (recommandations, suggestions)</option>
+                                    <option value="faible">Faible (filtres, tri basique)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Niveau actuel de conformité</label>
+                                <select id="currentCompliance">
+                                    <option value="">Sélectionnez votre situation</option>
+                                    <option value="aucune">Aucune démarche entreprise</option>
+                                    <option value="reflexion">En phase de réflexion</option>
+                                    <option value="encours">Mise en conformité en cours</option>
+                                    <option value="conforme">Pensons être conformes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="button-row">
+                        <button onclick="goToWelcome()" class="btn-secondary">Retour</button>
+                        <button onclick="generateReport()" class="btn-primary">
+                            Générer le diagnostic
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page résultats -->
+    <div id="resultsPage" class="page">
+        <div class="container">
+            <div class="card">
+                <div class="header-section">
+                    <div class="icon-large">📄</div>
+                    <h2>Rapport de Diagnostic RIA</h2>
+                    <p class="tagline" id="companyNameDisplay"></p>
+                </div>
+                
+                <div class="content-section">
+                    <!-- Niveau de risque -->
+                    <div class="risk-result">
+                        <h3>🎯 Niveau de Risque Identifié</h3>
+                        <div id="riskBadge" class="risk-badge"></div>
+                        <div class="risk-score">
+                            <span>Score de risque :</span>
+                            <span id="riskScore" class="score-value">0/100</span>
+                        </div>
+                    </div>
+
+                    <!-- Recommandations -->
+                    <div class="recommendations-section">
+                        <h3>✅ Recommandations de conformité</h3>
+                        <ul id="recommendationsList" class="recommendations-list"></ul>
+                    </div>
+
+                    <!-- Estimation -->
+                    <div class="estimates-grid">
+                        <div class="estimate-card budget">
+                            <h4>💰 Budget estimé</h4>
+                            <p id="estimatedCost" class="estimate-value"></p>
+                            <p class="estimate-subtitle">Pour la mise en conformité complète</p>
+                        </div>
+                        
+                        <div class="estimate-card timeline">
+                            <h4>⏱️ Délai estimé</h4>
+                            <p id="timeline" class="estimate-value"></p>
+                            <p class="estimate-subtitle">Durée moyenne du projet</p>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="cta-section">
+                        <h3>🚀 Prochaines étapes</h3>
+                        <p>
+                            Nos experts vous contacteront sous 24h pour discuter de votre projet et vous proposer un accompagnement personnalisé.
+                        </p>
+                        <div class="button-row">
+                            <button class="btn-white">
+                                📄 Télécharger le rapport PDF
+                            </button>
+                            <button onclick="resetApp()" class="btn-dark">
+                                Nouveau diagnostic
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="footer-contact">
+                        <p><strong>AI Compliance Partners</strong> - contact@ai-compliance.fr - +33 1 23 45 67 89</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // État de l'application
+        const appState = {
+            companyName: '',
+            email: '',
+            phone: '',
+            sector: '',
+            hasAI: '',
+            aiTypes: [],
+            aiPurpose: '',
+            dataTypes: [],
+            userImpact: '',
+            currentCompliance: ''
+        };
+
+        // Navigation entre les pages
+        function goToWelcome() {
+            showPage('welcomePage');
+        }
+
+        function goToForm() {
+            showPage('formPage');
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Gestion des boutons toggle et checkbox
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('toggle-btn')) {
+                const field = e.target.dataset.field;
+                const value = e.target.dataset.value;
+                
+                const group = e.target.parentElement;
+                group.querySelectorAll('.toggle-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                e.target.classList.add('active');
+                appState[field] = value;
+            }
+            
+            if (e.target.classList.contains('checkbox-btn')) {
+                const field = e.target.dataset.field;
+                const value = e.target.dataset.value;
+                
+                e.target.classList.toggle('active');
+                
+                if (e.target.classList.contains('active')) {
+                    if (!appState[field].includes(value)) {
+                        appState[field].push(value);
+                    }
+                } else {
+                    appState[field] = appState[field].filter(item => item !== value);
+                }
+            }
+        });
+
+        // Calcul du niveau de risque
+        function calculateRiskLevel() {
+            let riskScore = 0;
+            
+            if (appState.aiTypes.includes('reconnaissance-faciale')) riskScore += 30;
+            if (appState.aiTypes.includes('recrutement')) riskScore += 25;
+            if (appState.aiTypes.includes('credit')) riskScore += 25;
+            if (appState.aiTypes.includes('surveillance')) riskScore += 35;
+            if (appState.aiTypes.includes('chatbot')) riskScore += 10;
+            if (appState.aiTypes.includes('recommendation')) riskScore += 5;
+            
+            if (appState.userImpact === 'critique') riskScore += 30;
+            if (appState.userImpact === 'important') riskScore += 20;
+            if (appState.userImpact === 'modere') riskScore += 10;
+            
+            if (appState.dataTypes.includes('biometrique')) riskScore += 25;
+            if (appState.dataTypes.includes('sante')) riskScore += 20;
+            if (appState.dataTypes.includes('judiciaire')) riskScore += 20;
+            
+            let level = 'minimal';
+            
+            if (riskScore >= 60) {
+                level = 'inacceptable';
+            } else if (riskScore >= 40) {
+                level = 'eleve';
+            } else if (riskScore >= 20) {
+                level = 'limite';
+            }
+            
+            return { level, score: riskScore };
+        }
+
+        // Génération du rapport
+        function generateReport() {
+            appState.companyName = document.getElementById('companyName').value;
+            appState.email = document.getElementById('email').value;
+            appState.phone = document.getElementById('phone').value;
+            appState.sector = document.getElementById('sector').value;
+            appState.aiPurpose = document.getElementById('aiPurpose').value;
+            appState.userImpact = document.getElementById('userImpact').value;
+            appState.currentCompliance = document.getElementById('currentCompliance').value;
+            
+            if (!appState.companyName || !appState.email || !appState.phone || !appState.sector) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+            
+            if (!appState.hasAI) {
+                alert('Veuillez indiquer si vous utilisez actuellement l\'IA');
+                return;
+            }
+            
+            if (appState.aiTypes.length === 0) {
+                alert('Veuillez sélectionner au moins un type de système IA');
+                return;
+            }
+            
+            if (!appState.userImpact) {
+                alert('Veuillez sélectionner l\'impact sur les utilisateurs');
+                return;
+            }
+            
+            const risk = calculateRiskLevel();
+            
+            const recommendations = {
+                inacceptable: [
+                    "⛔ Ce système d'IA est INTERDIT selon le RIA",
+                    "🔄 Repenser complètement l'approche technologique",
+                    "⚖️ Consulter un juriste spécialisé en droit de l'IA",
+                    "📋 Évaluer des alternatives conformes"
+                ],
+                eleve: [
+                    "📋 Documentation technique complète obligatoire",
+                    "🔍 Évaluation de conformité par organisme notifié",
+                    "👁️ Mise en place de supervision humaine",
+                    "🔐 Tests de robustesse et cybersécurité renforcés",
+                    "📊 Traçabilité complète des données d'entraînement",
+                    "✅ Enregistrement dans la base de données européenne"
+                ],
+                limite: [
+                    "🔔 Informer les utilisateurs de l'interaction avec l'IA",
+                    "📝 Transparence sur le fonctionnement du système",
+                    "👤 Identifier clairement le contenu généré par IA",
+                    "📋 Documentation des processus décisionnels"
+                ],
+                minimal: [
+                    "✅ Aucune obligation spécifique du RIA",
+                    "💡 Suivre les bonnes pratiques éthiques",
+                    "📊 Documenter volontairement pour la transparence",
+                    "🔄 Rester informé des évolutions réglementaires"
+                ]
+            };
+            
+            const estimatedCost = {
+                inacceptable: "Non applicable - Système interdit",
+                eleve: "15 000€ - 50 000€",
+                limite: "3 000€ - 8 000€",
+                minimal: "1 000€ - 3 000€"
+            };
+            
+            const timeline = {
+                inacceptable: "Arrêt immédiat requis",
+                eleve: "6-12 mois",
+                limite: "2-4 mois",
+                minimal: "1-2 mois"
+            };
+            
+            const riskLabels = {
+                inacceptable: '🚫 Risque Inacceptable',
+                eleve: '⚠️ Risque Élevé',
+                limite: 'ℹ️ Risque Limité',
+                minimal: '✅ Risque Minimal'
+            };
+            
+            document.getElementById('companyNameDisplay').textContent = 'Entreprise : ' + appState.companyName;
+            
+            const riskBadge = document.getElementById('riskBadge');
+            riskBadge.textContent = riskLabels[risk.level];
+            riskBadge.className = 'risk-badge ' + risk.level;
+            
+            document.getElementById('riskScore').textContent = risk.score + '/100';
+            
+            const recList = document.getElementById('recommendationsList');
+            recList.innerHTML = '';
+            recommendations[risk.level].forEach((rec, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="rec-number">${index + 1}.</span>
+                    <span class="rec-text">${rec}</span>
+                `;
+                recList.appendChild(li);
+            });
+            
+            document.getElementById('estimatedCost').textContent = estimatedCost[risk.level];
+            document.getElementById('timeline').textContent = timeline[risk.level];
+            
+            showPage('resultsPage');
+        }
+
+        // Réinitialiser l'application
+        function resetApp() {
+            appState.companyName = '';
+            appState.email = '';
+            appState.phone = '';
+            appState.sector = '';
+            appState.hasAI = '';
+            appState.aiTypes = [];
+            appState.aiPurpose = '';
+            appState.dataTypes = [];
+            appState.userImpact = '';
+            appState.currentCompliance = '';
+            
+            document.getElementById('diagnosticForm').reset();
+            
+            document.querySelectorAll('.toggle-btn, .checkbox-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            showPage('welcomePage');
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('welcomePage');
+        });
+    </script>
+</body>
+</html>
