@@ -363,6 +363,11 @@
             color: #065f46;
         }
 
+        .risk-badge.acceptable {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
         .risk-score {
             display: flex;
             align-items: center;
@@ -884,7 +889,10 @@
             
             let level = 'minimal';
             
-            if (riskScore >= 60) {
+            if (riskScore > 100) {
+                riskScore = 100;
+                level = 'acceptable';
+            } else if (riskScore >= 60) {
                 level = 'inacceptable';
             } else if (riskScore >= 40) {
                 level = 'eleve';
@@ -953,6 +961,14 @@
                     "💡 Suivre les bonnes pratiques éthiques",
                     "📊 Documenter volontairement pour la transparence",
                     "🔄 Rester informé des évolutions réglementaires"
+                ],
+                acceptable: [
+                    "🎉 Votre système IA est CONFORME au RIA",
+                    "✅ Maintenir les bonnes pratiques actuelles",
+                    "📋 Documenter régulièrement les évolutions",
+                    "🔍 Réaliser des audits de conformité annuels",
+                    "📊 Suivre l'impact réel sur les utilisateurs",
+                    "🔄 Rester informé des évolutions réglementaires"
                 ]
             };
             
@@ -960,21 +976,24 @@
                 inacceptable: "Non applicable - Système interdit",
                 eleve: "15 000€ - 50 000€",
                 limite: "3 000€ - 8 000€",
-                minimal: "1 000€ - 3 000€"
+                minimal: "1 000€ - 3 000€",
+                acceptable: "Maintenance régulière"
             };
             
             const timeline = {
                 inacceptable: "Arrêt immédiat requis",
                 eleve: "6-12 mois",
                 limite: "2-4 mois",
-                minimal: "1-2 mois"
+                minimal: "1-2 mois",
+                acceptable: "En conformité"
             };
             
             const riskLabels = {
                 inacceptable: '🚫 Risque Inacceptable',
                 eleve: '⚠️ Risque Élevé',
                 limite: 'ℹ️ Risque Limité',
-                minimal: '✅ Risque Minimal'
+                minimal: '✅ Risque Minimal',
+                acceptable: '🎉 Risque Acceptable'
             };
             
             document.getElementById('companyNameDisplay').textContent = 'Entreprise : ' + appState.companyName;
