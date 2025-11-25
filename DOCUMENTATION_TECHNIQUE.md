@@ -51,11 +51,25 @@ Rapport de résultats (resultsPage)
 - `.benefits-list` : Liste avec icônes de validation
 - `.btn-primary` : Bouton CTA avec gradient
 
+**Capture d'écran :**
+
+![Page d'accueil](./Capture%20d'écran%202025-11-25%20084241.png)
+
 ---
 
 ### 2. **Page formulaire** (`formPage`)
 
 **Rôle :** Collecte des données pour le diagnostic
+
+**Captures d'écran :**
+
+![Formulaire - Partie 1](./photo1.png)
+
+![Formulaire - Partie 2](./photo4.png)
+
+![Formulaire - Partie 3](./photo3.png)
+
+![Formulaire - Partie 4](./photo2.png)
 
 **Sections du formulaire :**
 
@@ -136,6 +150,10 @@ Rapport de résultats (resultsPage)
 - 2 boutons :
   - Télécharger le rapport PDF
   - Nouveau diagnostic
+
+**Capture d'écran :**
+
+![Page de résultats](./Capture%20d'écran%202025-11-25%20092732.png)
 
 ---
 
